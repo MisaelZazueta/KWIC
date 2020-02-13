@@ -37,7 +37,7 @@ public class ObservadorLinea implements IObservador {
     }
 
     private static void imprimir(ArrayList<String> lineas) {
-        Collections.sort(lineas);
+        Collections.sort(lineas, String.CASE_INSENSITIVE_ORDER);
         for (int i = 0; i < lineas.size(); i++) {
             System.out.println(lineas.get(i));
         }
