@@ -2,13 +2,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
-public class Observador implements IObservador {
+public class ObservadorLinea implements IObservador {
     // ---------------------------------
-    public Observador(Linea lineaObservada) {
-        lineaObservada.setObservador(this);
-    }
     @Override
-    public void lineaActualizada(String linea) {
+    public void onLineaActualizada(String linea) {
         if (linea != null) {
             ArrayList<ArrayList<String>> lineas = new ArrayList<>();
             ArrayList<String> palabras = new ArrayList<>();
@@ -27,7 +24,7 @@ public class Observador implements IObservador {
                 lineas.add(palabras1);
                 String lineaAux = "";
                 for (int i = 0; i < palabras1.size(); i++) {
-                    if(i != (palabras1.size() - 1))
+                    if (i != (palabras1.size() - 1))
                         lineaAux += palabras1.get(i) + " ";
                     else
                         lineaAux += palabras1.get(i);
@@ -38,7 +35,8 @@ public class Observador implements IObservador {
             imprimir(lineasImp);
         }
     }
-    private static void imprimir(ArrayList<String> lineas){
+
+    private static void imprimir(ArrayList<String> lineas) {
         Collections.sort(lineas);
         for (int i = 0; i < lineas.size(); i++) {
             System.out.println(lineas.get(i));

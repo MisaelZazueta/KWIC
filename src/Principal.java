@@ -2,11 +2,14 @@ import java.io.*;
 
 public class Principal {
     public static void main(String[] args) throws IOException {
+
+        Linea linea1 = new Linea(null);
+        ObservadorLinea observadorLinea = new ObservadorLinea();
+        linea1.setObservador(observadorLinea);
+
         FileReader var = new FileReader("texto.txt");
         BufferedReader leer = new BufferedReader(var);
         String linea;
-        Linea linea1 = new Linea(null);
-        Observador observador = new Observador(linea1);
         linea = leer.readLine();
         linea1.setLinea(linea);
         while (linea != null){

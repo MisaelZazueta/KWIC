@@ -1,3 +1,5 @@
 public interface IObservador {
-    void lineaActualizada(String linea);
+
+    void onLineaActualizada(String linea);
+
 }
