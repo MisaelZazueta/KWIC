@@ -1,5 +1,5 @@
 public interface IObservador {
-
-    void onLineaActualizada(String linea);
-
+    void onShift(String linea);
+    void alfabetizar(String linea);
+    void finLinea();
 }

@@ -4,9 +4,8 @@ public class Principal {
     public static void main(String[] args) throws IOException {
 
         Linea linea1 = new Linea(null);
-        ObservadorLinea observadorLinea = new ObservadorLinea();
+        ObservadorNuevaLinea observadorLinea = new ObservadorNuevaLinea();
         linea1.setObservador(observadorLinea);
-
         FileReader var = new FileReader("texto.txt");
         BufferedReader leer = new BufferedReader(var);
         String linea;

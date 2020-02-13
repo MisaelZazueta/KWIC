@@ -20,6 +20,6 @@ public class Linea {
     }
 
     private void notificarObservador() {
-        observador.onLineaActualizada(linea);
+        observador.onShift(linea);
     }
 }
