@@ -1,20 +1,26 @@
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-public class ObservadorAlfabetizador implements IObservador {
+public class ObservadorAlfabetizador implements PropertyChangeListener {
+
     private ArrayList<String> lineas = new ArrayList<>();
-    @Override
-    public void onShift(String linea) {}
+
     public void alfabetizar(String linea) {
         lineas.add(linea);
         Collections.sort(lineas, String.CASE_INSENSITIVE_ORDER);
     }
 
+    public List<String> getLines(){
+        return this.lineas;
+    }
+
     @Override
-    public void finLinea() {
-        for (int i = 0; i < lineas.size(); i++) {
-            System.out.println(lineas.get(i));
-        }
-        System.out.println();
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        String linea = (String)evt.getNewValue();
+        this.alfabetizar(linea);
     }
 }

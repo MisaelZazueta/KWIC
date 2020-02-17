@@ -1,13 +1,28 @@
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
 
-public class ObservadorNuevaLinea implements IObservador {
-    // ---------------------------------
-    @Override
+public class ObservadorNuevaLinea implements PropertyChangeListener {
+
+    private List<String> lineas;
+    private PropertyChangeSupport changeSupport;
+
+    public ObservadorNuevaLinea(){
+
+        this.lineas = new ArrayList<>();
+        changeSupport = new PropertyChangeSupport(this);
+
+    }
+
+    public void agregadorEscuchador(PropertyChangeListener pcl){
+        this.changeSupport.addPropertyChangeListener(pcl);
+    }
+
     public void onShift(String linea) {
         if (linea != null) {
-            ObservadorAlfabetizador alfabetizador = new ObservadorAlfabetizador();
             ArrayList<ArrayList<String>> lineas = new ArrayList<>();
             ArrayList<String> palabras = new ArrayList<>();
             ArrayList<String> lineasImp = new ArrayList<>();
@@ -30,15 +45,19 @@ public class ObservadorNuevaLinea implements IObservador {
                     else
                         lineaAux += palabras1.get(i);
                 }
-                alfabetizador.alfabetizar(lineaAux);
                 lineasImp.add(lineaAux);
+                this.changeSupport.firePropertyChange("line_shifted",lineasImp,lineaAux);
+                this.lineas.add(lineaAux);
                 x++;
             }
-            alfabetizador.finLinea();
         }
     }
+
+
     @Override
-    public void alfabetizar(String linea) {}
-    @Override
-    public void finLinea() {}
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        String linea = (String)evt.getNewValue();
+        this.onShift(linea);
+    }
 }
